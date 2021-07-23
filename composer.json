@@ -20,14 +20,7 @@
 
     ],
     "psr-4": {
-      "app\\mis\\controller\\" : "src/"
-    },
-    "extra": {
-      "think": {
-        "route": {
-          "mis": "src/route/mis.php"
-        }
-      }
+      "app\\mis\\" : "src/app/mis"
     }
   }
 }
