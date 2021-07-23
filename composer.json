@@ -1,0 +1,24 @@
+{
+  "name": "admin_gateway",
+  "description":  "admin_gateway",
+  "keywords": ["admin_gateway"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "wuchuanbin",
+      "email": "wuchuanbin3013@163.com",
+      "homepage": "https://www.haichuanlife.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0"
+  },
+  "autoload": {
+    "classmap": [
+
+    ],
+    "psr-4": {
+    }
+  }
+}

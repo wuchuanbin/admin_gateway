@@ -1,0 +1,75 @@
+{include file="common:login_header" title="登陆"/}
+
+<body id="login">
+<div class="login">
+    <h2>{$system.site_name}</h2>
+    <form class="layui-form" method="post" target="_blank" action="">
+        <div class="layui-form-item">
+            <input type="username" name="user" id="user" placeholder="用户名" class="layui-input">
+            <i class="layui-icon input-icon">&#xe66f;</i>
+        </div>
+        <div class="layui-form-item">
+            <input type="password" name="pwd" id="password" placeholder="密码"  class="layui-input">
+            <i class="layui-icon input-icon">&#xe673;</i>
+        </div>
+        <div class="layui-form-item">
+            <input type="checkbox" name="box" lay-skin="primary" title="记住登陆状态" checked=""> <a class="back" href="javascript:;"  style="margin-top: 10px">忘记密码</a>
+        </div>
+        <div class="layui-form-item">
+            <button style="width: 100%" class="layui-btn" lay-submit lay-filter="login">登陆</button>
+
+        </div>
+    </form>
+
+    <script>
+        layui.use('form', function () {
+            var form = layui.form,
+                layer = layui.layer,
+                $ = layui.jquery;
+
+            layer.tips('请注意不要使用简单密码', '.layui-btn', {
+                tips: [3, '#333'],
+                time: 0
+            });
+
+            form.on('submit(login)', function (data) {
+                sessionStorage.isLgoin = 1; //模拟登录状态,实际使用时请删除掉
+
+                layer.load({
+                    shade: 0.5,
+                    time: 0,
+                });
+                $.ajax({
+                    url:'/mis/api/login',
+                    type:'post',
+                    data:{user:$('#user').val(),password:$('#password').val()},
+                    beforeSend:function () {
+                        this.layerIndex = layer.load(0, { shade: [0.5, '#393D49'] });
+                    },
+                    success:function(data){
+                        if(data.ErrorId != '0'){
+                            layer.msg(data.Message,{icon: 5});//失败的表情
+                            // o.removeClass('layui-btn-disabled');
+                            return;
+                        }else{
+                            layer.msg(data.Message, {
+                                icon: 6,//成功的表情
+                                time: 1000 //1秒关闭（如果不配置，默认是3秒）
+                            }, function(){
+                                window.location.href=data.Data['url'];
+                            });
+                        }
+                    },
+                    complete: function () {
+                        layer.close(this.layerIndex);
+                    },
+                });
+
+                return false;
+            });
+        });
+    </script>
+</div>
+</body>
+
+</html>

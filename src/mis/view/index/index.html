@@ -1,0 +1,77 @@
+{include file="common:header" title="DashBoard"/}
+
+<blockquote class="layui-elem-quote">
+    <h2>{$system.name}</h2>
+    <p>当前时间 <?php echo date('Y-m-d H:i');?></p>
+</blockquote>
+
+<div class="layui-row">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-header"><h2>公告</h2></div>
+            <div class="layui-card-body" style="min-height: 250px;">
+                {$system.welcome|raw}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="layui-row">
+    <div class="layui-col-md9" style="padding-right: 20px">
+        <h2>最新消息</h2>
+
+        <table class="layui-table layui-form">
+
+            <thead>
+            <tr>
+                <th>Topic</th>
+                <th>Content</th>
+                <th>SendTime</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            {volist name="$system.siteNotice" id="vo"}
+            <tr class="id36567">
+                <td><a href="{$vo.link}" target="_blank">{$vo.title}</a></td>
+                <td>{$vo.content}</td>
+                <td>{$vo.create_time}</td>
+            </tr>
+            {/volist}
+
+            </tbody>
+        </table>
+    </div>
+    <div class="layui-col-md3">
+        <h2>系统信息</h2>
+
+        <table class="layui-table layui-form">
+            <tr>
+                <th>QQ</th>
+                <td>{$system.qq}</td>
+            </tr>
+            <tr>
+                <th>手机号</th>
+                <td>{$system.contact}</td>
+            </tr>
+            <tr>
+                <th>联系人</th>
+                <td>{$system.contact_name}</td>
+            </tr>
+            <tr>
+                <th>系统版本</th>
+                <td>{$system.version}</td>
+            </tr>
+            <tr>
+                <th>证书</th>
+                <td>{$system.sign|raw}</td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+
+{include file="common:footer" /}
