@@ -20,7 +20,7 @@
 
     ],
     "psr-4": {
-      "app\\mis\\" : "src/app/mis"
+      "app\\mis\\" : "src/mis"
     }
   }
 }
